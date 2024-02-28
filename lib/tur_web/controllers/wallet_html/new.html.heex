@@ -1,0 +1,8 @@
+<.header>
+  New Wallet
+  <:subtitle>Use this form to manage wallet records in your database.</:subtitle>
+</.header>
+
+<.wallet_form changeset={@changeset} action={~p"/wallets"} />
+
+<.back navigate={~p"/wallets"}>Back to wallets</.back>

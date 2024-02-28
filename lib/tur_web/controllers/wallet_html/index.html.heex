@@ -1,0 +1,25 @@
+<.header>
+  Listing Wallets
+  <:actions>
+    <.link href={~p"/wallets/new"}>
+      <.button>New Wallet</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="wallets" rows={@wallets} row_click={&JS.navigate(~p"/wallets/#{&1}")}>
+  <:col :let={wallet} label="Name"><%= wallet.name %></:col>
+  <:col :let={wallet} label="Currency"><%= wallet.currency %></:col>
+  <:col :let={wallet} label="Quantity"><%= wallet.quantity %></:col>
+  <:action :let={wallet}>
+    <div class="sr-only">
+      <.link navigate={~p"/wallets/#{wallet}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/wallets/#{wallet}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={wallet}>
+    <.link href={~p"/wallets/#{wallet}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

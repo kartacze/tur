@@ -1,0 +1,17 @@
+<.header>
+  Wallet <%= @wallet.id %>
+  <:subtitle>This is a wallet record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/wallets/#{@wallet}/edit"}>
+      <.button>Edit wallet</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @wallet.name %></:item>
+  <:item title="Currency"><%= @wallet.currency %></:item>
+  <:item title="Quantity"><%= @wallet.quantity %></:item>
+</.list>
+
+<.back navigate={~p"/wallets"}>Back to wallets</.back>
