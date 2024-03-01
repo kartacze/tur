@@ -1,0 +1,29 @@
+<.header>
+  Listing Transfers
+  <:actions>
+    <.link href={~p"/wallets"}>
+      <.button>To wallets</.button>
+    </.link>
+
+    <.link href={~p"/transfers/new"}>
+      <.button>New Transfer</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="transfers" rows={@transfers} row_click={&JS.navigate(~p"/transfers/#{&1}")}>
+  <:col :let={transfer} label="Amount"><%= transfer.amount %></:col>
+  <:col :let={transfer} label="Currency"><%= transfer.currency %></:col>
+  <:col :let={transfer} label="Transfer date"><%= transfer.transfer_date %></:col>
+  <:action :let={transfer}>
+    <div class="sr-only">
+      <.link navigate={~p"/transfers/#{transfer}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/transfers/#{transfer}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={transfer}>
+    <.link href={~p"/transfers/#{transfer}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

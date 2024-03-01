@@ -19,6 +19,7 @@ defmodule TurWeb.Router do
 
     get "/", PageController, :home
     resources "/wallets", WalletController
+    resources "/transfers", TransferController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,8 @@
+<.header>
+  Edit Transfer <%= @transfer.id %>
+  <:subtitle>Use this form to manage transfer records in your database.</:subtitle>
+</.header>
+
+<.transfer_form changeset={@changeset} action={~p"/transfers/#{@transfer}"} />
+
+<.back navigate={~p"/transfers"}>Back to transfers</.back>

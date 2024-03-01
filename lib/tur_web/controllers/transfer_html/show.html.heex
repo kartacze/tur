@@ -1,0 +1,17 @@
+<.header>
+  Transfer <%= @transfer.id %>
+  <:subtitle>This is a transfer record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/transfers/#{@transfer}/edit"}>
+      <.button>Edit transfer</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Amount"><%= @transfer.amount %></:item>
+  <:item title="Currency"><%= @transfer.currency %></:item>
+  <:item title="Transfer date"><%= @transfer.transfer_date %></:item>
+</.list>
+
+<.back navigate={~p"/transfers"}>Back to transfers</.back>

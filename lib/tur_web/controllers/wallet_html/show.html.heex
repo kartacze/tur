@@ -2,6 +2,9 @@
   Wallet <%= @wallet.id %>
   <:subtitle>This is a wallet record from your database.</:subtitle>
   <:actions>
+    <.link href={~p"/transfers"}>
+      <.button>To transfers</.button>
+    </.link>
     <.link href={~p"/wallets/#{@wallet}/edit"}>
       <.button>Edit wallet</.button>
     </.link>

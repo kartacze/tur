@@ -1,0 +1,15 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:amount]} type="number" label="Amount" step="any" />
+  <.input field={f[:currency]} type="text" label="Currency" />
+  <.input field={f[:transfer_date]} type="date" label="Transfer date" />
+
+  <.input field={f[:creditor_id]} type="select" label="Creditor" multiple={false} options={creditor_opts(@changeset)} />
+  <.input field={f[:debitor_id]} type="select" multiple={false} label="Debitor" options={debitor_opts(@changeset)} />
+
+  <:actions>
+    <.button>Save Transfer</.button>
+  </:actions>
+</.simple_form>
