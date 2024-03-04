@@ -18,6 +18,6 @@ defmodule Tur.Transfers.Transfer do
   def changeset(transfer, attrs) do
     transfer
     |> cast(attrs, [:amount, :currency, :transfer_date])
-    |> validate_required([:amount, :currency, :transfer_date, :debitor_id, :creditor_id])
+    |> validate_required([:amount, :currency, :transfer_date])
   end
 end

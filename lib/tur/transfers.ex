@@ -4,6 +4,8 @@ defmodule Tur.Transfers do
   """
 
   import Ecto.Query, warn: false
+  alias Tur.Wallets
+  alias Tur.Wallets.Wallet
   alias Tur.Repo
 
   alias Tur.Transfers.Transfer
@@ -51,11 +53,35 @@ defmodule Tur.Transfers do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_transfer(attrs \\ %{}) do
+  def create_transfer(%{
+        "creditor_id" => creditor_id,
+        "debitor_id" => debitor_id,
+        "amount" => amount,
+        "transfer_date" => transfer_date,
+        "currency" => currency
+      }) do
+    debitor = Wallets.get_wallet!(debitor_id)
+    creditor = Wallets.get_wallet!(creditor_id)
 
-    %Transfer{}
-    |> Transfer.changeset(attrs)
-    |> Repo.insert()
+    # IO.inspect("Creditor ID is #{debitor}")
+    IO.inspect(amount)
+    decimal_amount = amount |> Float.parse
+
+
+    resp =
+      %Transfer{
+        amount: Decimal.new(1, trunc(Float.parse(amount) * 100), 2),
+        currency: currency,
+        transfer_date: transfer_date
+      }
+      |> Transfer.changeset(%{})
+      |> Ecto.Changeset.put_assoc(:creditor, creditor)
+      |> Ecto.Changeset.put_assoc(:debitor, debitor)
+      |> Repo.insert()
+
+    IO.inspect(resp)
+
+    resp
   end
 
   @doc """
