@@ -22,7 +22,6 @@ defmodule TurWeb.TransferController do
         |> redirect(to: ~p"/transfers/#{transfer}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect("ERROR HERE")
         render(conn, :new, changeset: changeset)
     end
   end
@@ -40,6 +39,8 @@ defmodule TurWeb.TransferController do
 
   def update(conn, %{"id" => id, "transfer" => transfer_params}) do
     transfer = Transfers.get_transfer!(id)
+
+    IO.inspect(transfer_params)
 
     case Transfers.update_transfer(transfer, transfer_params) do
       {:ok, transfer} ->

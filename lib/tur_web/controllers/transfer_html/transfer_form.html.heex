@@ -6,8 +6,25 @@
   <.input field={f[:currency]} type="text" label="Currency" />
   <.input field={f[:transfer_date]} type="date" label="Transfer date" />
 
-  <.input field={f[:creditor_id]} type="select" label="Creditor" multiple={false} options={creditor_opts(@changeset)} />
-  <.input field={f[:debitor_id]} type="select" multiple={false} label="Debitor" options={debitor_opts(@changeset)} />
+  <.inputs_for :let={fp} field={f[:creditor]}>
+    <.input
+      field={fp[:id]}
+      type="select"
+      label="Creditor"
+      multiple={false}
+      options={creditor_opts(@changeset)}
+    />
+  </.inputs_for>
+
+  <.inputs_for :let={fp} field={f[:debitor]}>
+    <.input
+      field={fp[:id]}
+      type="select"
+      multiple={false}
+      label="Debitor"
+      options={debitor_opts(@changeset)}
+    />
+  </.inputs_for>
 
   <:actions>
     <.button>Save Transfer</.button>

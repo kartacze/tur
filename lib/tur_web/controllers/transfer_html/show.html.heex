@@ -12,6 +12,8 @@
   <:item title="Amount"><%= @transfer.amount %></:item>
   <:item title="Currency"><%= @transfer.currency %></:item>
   <:item title="Transfer date"><%= @transfer.transfer_date %></:item>
+  <:item title="Sender"><%= @transfer.creditor.name %></:item>
+  <:item title="Receiver"><%= @transfer.debitor.name %></:item>
 </.list>
 
 <.back navigate={~p"/transfers"}>Back to transfers</.back>

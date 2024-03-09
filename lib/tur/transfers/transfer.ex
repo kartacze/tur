@@ -8,8 +8,8 @@ defmodule Tur.Transfers.Transfer do
     field :amount, :decimal
     field :transfer_date, :date
 
-    belongs_to :debitor, Tur.Wallets.Wallet
-    belongs_to :creditor, Tur.Wallets.Wallet
+    belongs_to :debitor, Tur.Wallets.Wallet, on_replace: :nilify
+    belongs_to :creditor, Tur.Wallets.Wallet, on_replace: :nilify
 
     timestamps(type: :utc_datetime)
   end
