@@ -110,7 +110,11 @@ defmodule Tur.Wallets do
   def apply_transfer(%Transfer{} = transfer) do
     debitor = transfer.debitor
     creditor = transfer.creditor
-    IO.inspect(creditor)
+
+    # there should be a check if both changesets are correct
+    update_wallet(debitor, %{quantity: debitor.quantity + transfer.amount})
+    update_wallet(creditor, %{quantity: creditor.quantity - transfer.amount})
+
     transfer
   end
 end

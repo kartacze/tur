@@ -67,12 +67,13 @@ defmodule Tur.WalletsTest do
     end
 
     # NOTE: HERE WE GO
-    # test "apply_transfer/1 updates creditor and debitor wallet" do
-    #   transfer = transfer_fixture()
-    #   Wallets.apply_transfer(transfer)
-    #   wallets = Wallets.list_wallets()
-    #
-    #   assert wallets[0].amount == "120.5"
-    # end
+    test "apply_transfer/1 updates creditor and debitor wallet" do
+      transfer = transfer_fixture()
+      Wallets.apply_transfer(transfer)
+      [debitor, creditor | rest] = Wallets.list_wallets()
+
+      assert debitor.quantity == Decimal.new("0") 
+      assert creditor.quantity == Decimal.new("0")
+    end
   end
 end
