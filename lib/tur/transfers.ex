@@ -76,6 +76,10 @@ defmodule Tur.Transfers do
       |> Ecto.Changeset.put_assoc(:debitor, debitor)
       |> Repo.insert()
 
+    case resp do
+      {:ok, transfer} -> Wallets.apply_transfer(transfer)
+    end
+
     resp
   end
 

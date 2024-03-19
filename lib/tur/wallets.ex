@@ -112,8 +112,8 @@ defmodule Tur.Wallets do
     creditor = transfer.creditor
 
     # there should be a check if both changesets are correct
-    update_wallet(debitor, %{quantity: debitor.quantity + transfer.amount})
-    update_wallet(creditor, %{quantity: creditor.quantity - transfer.amount})
+    update_wallet(debitor, %{quantity: Decimal.add(debitor.quantity, transfer.amount)})
+    update_wallet(creditor, %{quantity: Decimal.sub(creditor.quantity, transfer.amount)})
 
     transfer
   end

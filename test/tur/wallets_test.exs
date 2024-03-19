@@ -72,8 +72,8 @@ defmodule Tur.WalletsTest do
       Wallets.apply_transfer(transfer)
       [debitor, creditor | rest] = Wallets.list_wallets()
 
-      assert debitor.quantity == Decimal.new("0") 
-      assert creditor.quantity == Decimal.new("0")
+      assert debitor.quantity == transfer.amount
+      assert creditor.quantity == Decimal.mult(transfer.amount, -1)
     end
   end
 end
