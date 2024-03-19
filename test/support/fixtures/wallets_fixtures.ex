@@ -13,7 +13,7 @@ defmodule Tur.WalletsFixtures do
       |> Enum.into(%{
         currency: "some currency",
         name: "some name",
-        quantity: "120.5"
+        quantity: "0"
       })
       |> Tur.Wallets.create_wallet()
 

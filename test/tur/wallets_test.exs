@@ -7,6 +7,7 @@ defmodule Tur.WalletsTest do
     alias Tur.Wallets.Wallet
 
     import Tur.WalletsFixtures
+    import Tur.TransfersFixtures
 
     @invalid_attrs %{name: nil, currency: nil, quantity: nil}
 
@@ -35,7 +36,12 @@ defmodule Tur.WalletsTest do
 
     test "update_wallet/2 with valid data updates the wallet" do
       wallet = wallet_fixture()
-      update_attrs = %{name: "some updated name", currency: "some updated currency", quantity: "456.7"}
+
+      update_attrs = %{
+        name: "some updated name",
+        currency: "some updated currency",
+        quantity: "456.7"
+      }
 
       assert {:ok, %Wallet{} = wallet} = Wallets.update_wallet(wallet, update_attrs)
       assert wallet.name == "some updated name"
@@ -59,5 +65,14 @@ defmodule Tur.WalletsTest do
       wallet = wallet_fixture()
       assert %Ecto.Changeset{} = Wallets.change_wallet(wallet)
     end
+
+    # NOTE: HERE WE GO
+    # test "apply_transfer/1 updates creditor and debitor wallet" do
+    #   transfer = transfer_fixture()
+    #   Wallets.apply_transfer(transfer)
+    #   wallets = Wallets.list_wallets()
+    #
+    #   assert wallets[0].amount == "120.5"
+    # end
   end
 end

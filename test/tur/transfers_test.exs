@@ -9,14 +9,6 @@ defmodule Tur.TransfersTest do
     import Tur.TransfersFixtures
     import Tur.WalletsFixtures
 
-    @invalid_attrs %{
-      currency: nil,
-      amount: nil,
-      transfer_date: nil,
-      creditor: %{id: 100},
-      debitor: %{id: 1001}
-    }
-
     test "list_transfers/0 returns all transfers" do
       transfer = transfer_fixture()
       assert Transfers.list_transfers() == [transfer]
@@ -32,11 +24,11 @@ defmodule Tur.TransfersTest do
       wallet_2 = wallet_fixture(%{name: "wallet 2"})
 
       valid_attrs = %{
-        currency: "PLN",
-        amount: "120.5",
-        transfer_date: "2024-02-27",
-        debitor: %{id: wallet_1.id},
-        creditor: %{id: wallet_2.id}
+        "currency" => "PLN",
+        "amount" => "120.5",
+        "transfer_date" => "2024-02-27",
+        "debitor" => %{"id" => wallet_1.id},
+        "creditor" => %{"id" => wallet_2.id}
       }
 
       assert {:ok, %Transfer{} = transfer} = Transfers.create_transfer(valid_attrs)
@@ -55,11 +47,11 @@ defmodule Tur.TransfersTest do
       %{id: creditor_id} = wallet_fixture(%{name: "new creditor"})
 
       update_attrs = %{
-        currency: "EUR",
-        amount: "456.7",
-        transfer_date: "2024-02-29",
-        debitor: %{id: debitor_id},
-        creditor: %{id: creditor_id}
+        "currency" => "EUR",
+        "amount" => "456.7",
+        "transfer_date" => "2024-02-29",
+        "debitor" => %{"id" => debitor_id},
+        "creditor" => %{"id" => creditor_id}
       }
 
       assert {:ok, %Transfer{} = transfer} = Transfers.update_transfer(transfer, update_attrs)
@@ -72,8 +64,16 @@ defmodule Tur.TransfersTest do
     end
 
     # test "update_transfer/2 with invalid data returns error changeset" do
+    #   invalid_attrs = %{
+    #     "currency" => nil,
+    #     "amount" => nil,
+    #     "transfer_date" => nil,
+    #     "creditor" => %{id: 100},
+    #     "debitor" => %{id: 1001}
+    #   }
+    #
     #   transfer = transfer_fixture()
-    #   assert {:error, %Ecto.Changeset{}} = Transfers.update_transfer(transfer, @invalid_attrs)
+    #   assert {:error} = Transfers.update_transfer(transfer, invalid_attrs)
     #   assert transfer == Transfers.get_transfer!(transfer.id)
     # end
 

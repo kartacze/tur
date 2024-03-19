@@ -4,6 +4,7 @@ defmodule Tur.Wallets do
   """
 
   import Ecto.Query, warn: false
+  alias Tur.Transfers.Transfer
   alias Tur.Repo
 
   alias Tur.Wallets.Wallet
@@ -100,5 +101,16 @@ defmodule Tur.Wallets do
   """
   def change_wallet(%Wallet{} = wallet, attrs \\ %{}) do
     Wallet.changeset(wallet, attrs)
+  end
+
+  @doc """
+  Applies Transfer to given accounts
+
+  """
+  def apply_transfer(%Transfer{} = transfer) do
+    debitor = transfer.debitor
+    creditor = transfer.creditor
+    IO.inspect(creditor)
+    transfer
   end
 end

@@ -54,14 +54,14 @@ defmodule Tur.Transfers do
 
   """
   def create_transfer(%{
-        creditor: creditor,
-        debitor: debitor,
-        amount: amount,
-        transfer_date: transfer_date,
-        currency: currency
+        "creditor" => creditor,
+        "debitor" => debitor,
+        "amount" => amount,
+        "transfer_date" => transfer_date,
+        "currency" => currency
       }) do
-    debitor = Wallets.get_wallet!(debitor.id)
-    creditor = Wallets.get_wallet!(creditor.id)
+    debitor = Wallets.get_wallet!(debitor["id"])
+    creditor = Wallets.get_wallet!(creditor["id"])
 
     {:ok, date} = Date.from_iso8601(transfer_date)
 
@@ -92,8 +92,6 @@ defmodule Tur.Transfers do
 
   """
   def update_transfer(%Transfer{} = transfer, attrs) do
-    IO.inspect(attrs)
-
     transfer
     |> Transfer.changeset(attrs)
     |> update_debitor(attrs)
@@ -102,7 +100,6 @@ defmodule Tur.Transfers do
   end
 
   defp update_debitor(changeset, %{"debitor" => %{"id" => id}}) do
-    IO.inspect("UPDATE DEBITOR")
     debitor = Wallets.get_wallet!(id)
 
     changeset
@@ -114,7 +111,6 @@ defmodule Tur.Transfers do
   end
 
   defp update_creditor(changeset, %{"creditor" => %{"id" => id}}) do
-    IO.inspect("UPDATE CREDITOR")
     creditor = Wallets.get_wallet!(id)
 
     changeset

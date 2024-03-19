@@ -16,11 +16,11 @@ defmodule Tur.TransfersFixtures do
     {:ok, transfer} =
       attrs
       |> Enum.into(%{
-        amount: "120.5",
-        currency: "PLN",
-        transfer_date: "2024-02-28",
-        debitor: %{id: wallet_debitor.id},
-        creditor: %{id: wallet_creditor.id}
+        "amount" => "120.5",
+        "currency" => "PLN",
+        "transfer_date" => "2024-02-28",
+        "debitor" => %{"id" => wallet_debitor.id},
+        "creditor" => %{"id" => wallet_creditor.id}
       })
       |> Tur.Transfers.create_transfer()
 
